@@ -1,0 +1,37 @@
+/* ============================== RESET ============================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ============================== CONTAINER ============================== */
+.container { width: 90%; max-width: 1200px; margin: auto; }
+
+/* ============================== SECTION ============================== */
+.section { padding: 80px 0; }
+
+/* ============================== GRID UTILITIES ============================== */
+.flex {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* ============================== CENTER ============================== */
+.center { display: flex; justify-content: center; align-items: center; }
+
+/* ============================== TEXT UTILITIES ============================== */
+.text-center { text-align: center; }
+
+/* ============================== RESPONSIVE ============================== */
+@media (max-width: 768px) {
+  .flex { grid-template-columns: 1fr; }
+  .form-wrapper { padding: 28px 22px; }
+  .nav-links { gap: 0; }
+  .nav-links a { padding: 6px 9px; font-size: 0.8rem; }
+  .hero h1 { font-size: 2rem; }
+  .main-tabs { width: 100%; }
+  .main-tab { flex: 1; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 110px 0 70px; }
+  .skills-grid { grid-template-columns: 1fr; }
+}

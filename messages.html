@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messages — SkillSwap</title>
+  <meta name="description" content="Connect with fellow students on SkillSwap. Send and receive messages to arrange skill exchanges.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script>(function(){var t=localStorage.getItem('skillswap-theme')||'light';if(t!=='dark')document.documentElement.setAttribute('data-theme','light');})();</script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">SkillSwap</a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="browse.html">Browse</a>
+          <a href="offer.html">Offer</a>
+          <a href="request.html">Request</a>
+          <a href="messages.html" class="active">Messages</a>
+          <a href="contact.html">Contact</a>
+          <a href="about.html">About</a>
+        </div>
+        <div id="auth-nav"></div>
+        <button id="theme-toggle" class="theme-toggle" title="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" style="padding: 100px 0 60px;">
+    <div class="container">
+      <h1>Messages & Connect</h1>
+      <p>Reach out to peers, schedule sessions, and grow together.</p>
+    </div>
+  </section>
+
+  <!-- Messages Layout -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="messages-layout">
+
+        <!-- Sidebar: Conversations -->
+        <aside class="conversations-panel">
+          <div class="conversations-header">
+            <h3>Conversations</h3>
+            <button class="btn btn-sm btn-filled" id="new-msg-btn" title="New Message">+ New</button>
+          </div>
+          <div class="conv-search-wrap">
+            <input type="text" id="conv-search" class="form-input" placeholder="Search conversations…">
+          </div>
+          <ul class="conv-list" id="conv-list">
+            <!-- Conversations injected by JS -->
+          </ul>
+          <div class="conv-empty" id="conv-empty" style="display:none;">
+            <span>💬</span>
+            <p>No conversations yet. Start one!</p>
+          </div>
+        </aside>
+
+        <!-- Main: Chat Window -->
+        <main class="chat-panel" id="chat-panel">
+
+          <!-- Empty / Placeholder -->
+          <div class="chat-placeholder" id="chat-placeholder">
+            <div class="chat-placeholder-icon">💬</div>
+            <h3>Select a conversation</h3>
+            <p>Choose from your existing conversations or start a new one to connect with a peer.</p>
+            <button class="btn btn-filled" id="start-connect-btn">Connect with a Peer</button>
+          </div>
+
+          <!-- Active Chat (hidden until conversation selected) -->
+          <div class="chat-active" id="chat-active" style="display:none;">
+            <div class="chat-header" id="chat-header">
+              <div class="chat-peer-avatar" id="chat-peer-avatar">?</div>
+              <div>
+                <h4 id="chat-peer-name">Peer Name</h4>
+                <span id="chat-peer-status" class="peer-status online">● Online</span>
+              </div>
+              <div style="margin-left:auto; display:flex; gap:8px;">
+                <button class="btn btn-sm" id="schedule-btn" title="Schedule a session">📅 Schedule</button>
+                <button class="btn btn-sm" id="delete-conv-btn" title="Delete conversation">🗑️</button>
+              </div>
+            </div>
+
+            <!-- Messages Area -->
+            <div class="chat-messages" id="chat-messages"></div>
+
+            <!-- Compose -->
+            <div class="chat-compose">
+              <textarea id="msg-input" class="form-input" rows="1" placeholder="Type a message…"></textarea>
+              <button class="btn btn-filled" id="send-msg-btn">Send ➤</button>
+            </div>
+          </div>
+
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- Connect Modal -->
+  <div class="modal-overlay" id="connect-modal" style="display:none;">
+    <div class="modal-box">
+      <button class="modal-close" id="close-connect-modal">✕</button>
+      <h3>Connect with a Peer</h3>
+      <p style="margin-bottom:20px;">Enter the college email of the student you'd like to connect with.</p>
+      <div class="form-group">
+        <label for="peer-email-input">Student Email</label>
+        <input type="email" id="peer-email-input" class="form-input" placeholder="e.g. cb.en.u4cse23001@cb.students.amrita.edu">
+        <span class="field-error" id="peer-email-err">Please enter a valid email.</span>
+      </div>
+      <div class="form-group">
+        <label for="connect-message">First Message</label>
+        <textarea id="connect-message" class="form-input" rows="3" placeholder="Hi! I saw you offer Python lessons. I'd love to exchange skills…"></textarea>
+        <span class="field-error" id="connect-msg-err">Please type a message.</span>
+      </div>
+      <button class="btn btn-filled btn-full" id="send-connect-btn">Send Request ➤</button>
+    </div>
+  </div>
+
+  <!-- Schedule Modal -->
+  <div class="modal-overlay" id="schedule-modal" style="display:none;">
+    <div class="modal-box">
+      <button class="modal-close" id="close-schedule-modal">✕</button>
+      <h3>📅 Schedule a Session</h3>
+      <p style="margin-bottom:20px;">Propose a date and time for your skill exchange session.</p>
+      <div class="form-group">
+        <label for="session-date">Date</label>
+        <input type="date" id="session-date" class="form-input">
+      </div>
+      <div class="form-group">
+        <label for="session-time">Time</label>
+        <input type="time" id="session-time" class="form-input">
+      </div>
+      <div class="form-group">
+        <label for="session-mode">Mode</label>
+        <select id="session-mode" class="form-input">
+          <option value="">Select mode</option>
+          <option value="In-Person">In-Person</option>
+          <option value="Online (Google Meet)">Online (Google Meet)</option>
+          <option value="Online (Zoom)">Online (Zoom)</option>
+        </select>
+      </div>
+      <button class="btn btn-filled btn-full" id="confirm-schedule-btn">Confirm Session ✓</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 SkillSwap | Built by Team B14 — Aligned with SDG 4 &amp; SDG 8</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script type="module" src="js/messages.js"></script>
+</body>
+</html>

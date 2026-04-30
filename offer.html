@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offer a Skill — SkillSwap</title>
+  <meta name="description" content="Share your expertise with peers. Offer a skill on SkillSwap and start teaching today.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script>(function(){var t=localStorage.getItem('skillswap-theme')||'light';if(t!=='dark')document.documentElement.setAttribute('data-theme','light');})();</script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">SkillSwap</a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="browse.html">Browse</a>
+          <a href="offer.html" class="active">Offer</a>
+          <a href="request.html">Request</a>
+          <a href="messages.html">Messages</a>
+          <a href="contact.html">Contact</a>
+          <a href="about.html">About</a>
+        </div>
+        <div id="auth-nav"></div>
+        <button id="theme-toggle" class="theme-toggle" title="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Offer a Skill</h1>
+      <p>Share what you know. Help a fellow student grow.</p>
+    </div>
+  </section>
+
+  <!-- Form Section -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="form-wrapper">
+
+        <form id="offer-form" novalidate>
+
+          <!-- Name -->
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" class="form-input" placeholder="e.g. Rahul Sharma" autocomplete="name">
+            <span class="field-error" id="err-name">Please enter your full name.</span>
+          </div>
+
+
+          <!-- Skill Title -->
+          <div class="form-group">
+            <label for="skillTitle">Skill Title</label>
+            <input type="text" id="skillTitle" class="form-input" placeholder="e.g. Python for Beginners">
+            <span class="field-error" id="err-skillTitle">Please enter a skill title.</span>
+          </div>
+
+          <!-- Category -->
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" class="form-input">
+              <option value="" disabled selected>Select a category</option>
+              <option value="Technical">Technical</option>
+              <option value="Creative">Creative</option>
+              <option value="Academic">Academic</option>
+            </select>
+            <span class="field-error" id="err-category">Please select a category.</span>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" class="form-input" placeholder="What will you teach? What level is it for? What will students gain?"></textarea>
+            <span class="field-error" id="err-description">Please add a short description (min 20 characters).</span>
+          </div>
+
+          <!-- Availability -->
+          <div class="form-group">
+            <label>Availability</label>
+            <div class="check-group">
+              <label class="check-item"><input type="checkbox" name="availability" value="Weekdays"> Weekdays</label>
+              <label class="check-item"><input type="checkbox" name="availability" value="Weekends"> Weekends</label>
+              <label class="check-item"><input type="checkbox" name="availability" value="Evenings"> Evenings</label>
+            </div>
+            <span class="field-error" id="err-availability">Please select at least one availability slot.</span>
+          </div>
+
+          <!-- Mode -->
+          <div class="form-group">
+            <label>Mode of Teaching</label>
+            <div class="radio-group">
+              <label class="radio-item"><input type="radio" name="mode" value="In-Person"> In-Person</label>
+              <label class="radio-item"><input type="radio" name="mode" value="Online"> Online</label>
+              <label class="radio-item"><input type="radio" name="mode" value="Both"> Both</label>
+            </div>
+            <span class="field-error" id="err-mode">Please select a mode of teaching.</span>
+          </div>
+
+          <button type="submit" class="btn btn-filled btn-full" id="submit-btn">
+            <span id="submit-text">List My Skill →</span>
+          </button>
+
+        </form>
+
+        <!-- Success Banner -->
+        <div class="success-banner" id="success-banner">
+          <div class="success-icon">🎉</div>
+          <h3>Your skill is now live!</h3>
+          <p>Students can discover and connect with you through the Browse page.</p>
+          <a href="browse.html" class="btn" style="margin-top:16px;">View Browse Skills</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 SkillSwap | Built by Team B14</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script type="module" src="js/offer.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillSwap — Exchange Skills. Learn Anything.</title>
+  <meta name="description" content="SkillSwap connects students to exchange skills, learn from peers, and grow together without financial barriers.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script>(function(){var t=localStorage.getItem('skillswap-theme')||'light';if(t!=='dark')document.documentElement.setAttribute('data-theme','light');})();</script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">SkillSwap</a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="dashboard.html" class="active">Dashboard</a>
+          <a href="browse.html">Browse</a>
+          <a href="offer.html">Offer</a>
+          <a href="request.html">Request</a>
+          <a href="messages.html">Messages</a>
+          <a href="contact.html">Contact</a>
+          <a href="about.html">About</a>
+        </div>
+        <div id="auth-nav"></div>
+        <button id="theme-toggle" class="theme-toggle" title="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Exchange Skills.<br>Learn Anything.</h1>
+      <p>Connect with students across campus and grow together — no money, just knowledge.</p>
+      <div class="hero-actions">
+        <a href="browse.html" class="btn btn-filled">Browse Skills</a>
+        <a href="offer.html"  class="btn">Offer a Skill</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-subtitle">Three simple steps to start your learning journey.</p>
+      <div class="flex stagger">
+        <div class="card animate-in">
+          <h3>🎯 Offer a Skill</h3>
+          <p>Share what you know — from coding and design to music and mathematics.</p>
+        </div>
+        <div class="card animate-in">
+          <h3>🔍 Find a Skill</h3>
+          <p>Browse listings from your peers and discover what they're willing to teach.</p>
+        </div>
+        <div class="card animate-in">
+          <h3>🤝 Connect & Learn</h3>
+          <p>Reach out directly and start your skill exchange — no cost, just collaboration.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Categories</h2>
+      <p class="section-subtitle">Explore skills across three broad domains.</p>
+      <div class="flex stagger">
+        <div class="card animate-in">
+          <h3>💻 Technical Skills</h3>
+          <p>Programming, AI, Web Development</p>
+          <div class="extra">
+            <p>Learn full-stack development, machine learning fundamentals, and build real-world applications with hands-on guidance from your peers.</p>
+          </div>
+        </div>
+        <div class="card animate-in">
+          <h3>🎨 Creative Skills</h3>
+          <p>Design, Music, Content Creation</p>
+          <div class="extra">
+            <p>Explore UI/UX design, music production, video editing, and content creation techniques from talented student creators.</p>
+          </div>
+        </div>
+        <div class="card animate-in">
+          <h3>📚 Academic Support</h3>
+          <p>Math, Science, Exam Preparation</p>
+          <div class="extra">
+            <p>Get help with problem solving, exam strategies, and concept clarity from high-achieving peers in your faculty.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section text-center">
+    <div class="container">
+      <h2 class="section-title">Ready to Get Started?</h2>
+      <p class="section-subtitle">Join hundreds of students already exchanging skills on campus.</p>
+      <div class="hero-actions">
+        <a href="request.html" class="btn btn-filled">Request a Skill</a>
+        <a href="browse.html" class="btn">Browse Listings</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 SkillSwap | Built by Team B14 — Aligned with SDG 4 & SDG 8</p>
+    </div>
+  </footer>
+
+  <script>
+    // Send everyone to the login/register page immediately.
+    // login.js will redirect already-authenticated users to dashboard.html.
+    window.location.replace('login.html');
+  </script>
+</body>
+</html>

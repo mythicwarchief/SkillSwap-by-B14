@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Support — SkillSwap</title>
+  <meta name="description" content="Get help or send feedback to the SkillSwap team. We're here to support your learning journey.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script>(function(){var t=localStorage.getItem('skillswap-theme')||'light';if(t!=='dark')document.documentElement.setAttribute('data-theme','light');})();</script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">SkillSwap</a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="browse.html">Browse</a>
+          <a href="offer.html">Offer</a>
+          <a href="request.html">Request</a>
+          <a href="messages.html">Messages</a>
+          <a href="contact.html" class="active">Contact</a>
+          <a href="about.html">About</a>
+        </div>
+        <div id="auth-nav"></div>
+        <button id="theme-toggle" class="theme-toggle" title="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" style="padding: 100px 0 60px;">
+    <div class="container">
+      <h1>Contact & Support</h1>
+      <p>Have a question or feedback? We'd love to hear from you.</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+
+      <!-- Support Cards Row -->
+      <div class="support-cards">
+        <div class="support-card animate-in" id="sc-faq">
+          <span class="support-card-icon">❓</span>
+          <h3>FAQ</h3>
+          <p>Find quick answers to the most common questions about SkillSwap.</p>
+          <a href="about.html#faq" class="btn btn-sm">Browse FAQ</a>
+        </div>
+        <div class="support-card animate-in" id="sc-msg" style="animation-delay:0.1s;">
+          <span class="support-card-icon">💬</span>
+          <h3>Live Chat</h3>
+          <p>Message the SkillSwap team or connect directly with a peer tutor.</p>
+          <a href="messages.html" class="btn btn-sm">Open Messages</a>
+        </div>
+        <div class="support-card animate-in" id="sc-email" style="animation-delay:0.2s;">
+          <span class="support-card-icon">📧</span>
+          <h3>Email Us</h3>
+          <p>Send us an email at <strong>support@am.amrita.edu</strong> and we'll reply within 24 hours.</p>
+          <a href="mailto:support@am.amrita.edu" class="btn btn-sm">Send Email</a>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="form-wrapper" style="margin-top: 56px;">
+        <h2 class="section-title" style="margin-bottom:28px;">Send Us a Message</h2>
+
+        <form id="contact-form" novalidate>
+
+          <!-- Name -->
+          <div class="form-group">
+            <label for="contact-name">Full Name</label>
+            <input type="text" id="contact-name" class="form-input" placeholder="e.g. Adithyadev K">
+            <span class="field-error" id="err-contact-name">Please enter your full name.</span>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="contact-email">College Email</label>
+            <input type="email" id="contact-email" class="form-input" placeholder="e.g. yourname@am.students.amrita.edu">
+            <span class="field-error" id="err-contact-email">Please enter a valid Amrita email.</span>
+          </div>
+
+          <!-- Issue Type -->
+          <div class="form-group">
+            <label for="issue-type">Issue / Query Type</label>
+            <select id="issue-type" class="form-input">
+              <option value="" disabled selected>Select a topic</option>
+              <option value="Account Issue">Account Issue</option>
+              <option value="Skill Listing Problem">Skill Listing Problem</option>
+              <option value="Messaging Issue">Messaging Issue</option>
+              <option value="Feature Request">Feature Request</option>
+              <option value="Report a User">Report a User</option>
+              <option value="General Feedback">General Feedback</option>
+              <option value="Other">Other</option>
+            </select>
+            <span class="field-error" id="err-issue-type">Please select an issue type.</span>
+          </div>
+
+          <!-- Priority -->
+          <div class="form-group">
+            <label>Priority Level</label>
+            <div class="radio-group">
+              <label class="radio-item"><input type="radio" name="priority" value="Low"> Low</label>
+              <label class="radio-item"><input type="radio" name="priority" value="Medium"> Medium</label>
+              <label class="radio-item"><input type="radio" name="priority" value="High"> High — Urgent</label>
+            </div>
+            <span class="field-error" id="err-priority">Please select a priority level.</span>
+          </div>
+
+          <!-- Message -->
+          <div class="form-group">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" class="form-input" rows="5" placeholder="Describe your issue or feedback in detail. The more context, the faster we can help…"></textarea>
+            <span class="field-error" id="err-contact-message">Please enter a message (min 20 characters).</span>
+          </div>
+
+          <!-- Attach screenshot checkbox -->
+          <div class="form-group">
+            <label>Options</label>
+            <div class="check-group">
+              <label class="check-item"><input type="checkbox" id="opt-followup"> Follow up via email</label>
+              <label class="check-item"><input type="checkbox" id="opt-anonymous"> Submit anonymously</label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-filled btn-full" id="contact-submit">
+            <span id="contact-submit-text">Send Message →</span>
+          </button>
+
+        </form>
+
+        <!-- Success Banner -->
+        <div class="success-banner" id="contact-success">
+          <div class="success-icon">✅</div>
+          <h3>Message Received!</h3>
+          <p>Thank you for reaching out. The SkillSwap team will get back to you within 24 hours.</p>
+          <a href="dashboard.html" class="btn" style="margin-top:16px;">Back to Dashboard</a>
+        </div>
+
+      </div>
+
+      <!-- Info Row -->
+      <div class="contact-info-row">
+        <div class="contact-info-item animate-in">
+          <span>🏛️</span>
+          <div>
+            <strong>Campus</strong>
+            <p>Amrita Vishwa Vidyapeetham, Amritapuri</p>
+          </div>
+        </div>
+        <div class="contact-info-item animate-in" style="animation-delay:0.1s;">
+          <span>📬</span>
+          <div>
+            <strong>Email</strong>
+            <p>support@am.amrita.edu</p>
+          </div>
+        </div>
+        <div class="contact-info-item animate-in" style="animation-delay:0.2s;">
+          <span>⏰</span>
+          <div>
+            <strong>Response Time</strong>
+            <p>Within 24 hours on working days</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 SkillSwap | Built by Team B14 — Aligned with SDG 4 &amp; SDG 8</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script type="module" src="js/contact.js"></script>
+</body>
+</html>

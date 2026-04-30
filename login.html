@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — SkillSwap</title>
+  <meta name="description" content="Sign in to SkillSwap with your Amrita college email to start exchanging skills.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <!-- Anti-flash theme script -->
+  <script>(function(){var t=localStorage.getItem('skillswap-theme')||'light';if(t!=='dark')document.documentElement.setAttribute('data-theme','light');})();</script>
+  <style>
+    .login-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+    .login-page::before {
+      content: '';
+      position: fixed;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255,204,0,0.07) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .login-brand {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem; font-weight: 800;
+      background: linear-gradient(135deg, #ffcc00, #ff9500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .login-tagline {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 36px;
+    }
+    .login-card {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(15,15,15,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 36px;
+      animation: fade-slide-up 0.6s ease both;
+    }
+    html[data-theme="light"] .login-card {
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+    }
+    .login-tabs {
+      display: flex;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 4px;
+      margin-bottom: 28px;
+    }
+    .login-tab {
+      flex: 1; text-align: center;
+      padding: 9px 0;
+      border-radius: 8px;
+      border: none; background: transparent;
+      font-size: 0.9rem; font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.25s;
+      font-family: 'Inter', sans-serif;
+    }
+    .login-tab.active {
+      background: var(--accent);
+      color: #000;
+      box-shadow: 0 4px 14px rgba(255,204,0,0.25);
+    }
+    .login-form { display: none; }
+    .login-form.active { display: block; }
+    .login-footer-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .login-footer-link a {
+      color: var(--accent);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .domain-hint {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+    .domain-hint span { color: var(--accent); }
+    .login-top-bar {
+      position: absolute; top: 20px; right: 24px;
+      display: flex; align-items: center; gap: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar: theme toggle only (index.html redirects here, so no "Home" link) -->
+  <div class="login-top-bar">
+    <button id="theme-toggle" class="theme-toggle" title="Toggle theme">☀️</button>
+  </div>
+
+  <div class="login-page">
+
+    <div class="login-brand">SkillSwap</div>
+    <p class="login-tagline">Exchange skills. Learn anything. Amrita campus only.</p>
+
+    <div class="login-card">
+
+      <!-- Tabs -->
+      <div class="login-tabs">
+        <button class="login-tab active" id="tab-login">Sign In</button>
+        <button class="login-tab" id="tab-register">Register</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" class="login-form active" novalidate>
+        <div class="form-group">
+          <label for="login-email">College Email</label>
+          <input type="email" id="login-email" class="form-input"
+            placeholder="am.sc.u4aie25159@am.students.amrita.edu" autocomplete="email">
+          <span class="field-error" id="err-login-email">Enter your Amrita college email.</span>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" class="form-input"
+            placeholder="Your password" autocomplete="current-password">
+          <span class="field-error" id="err-login-password">Enter your password.</span>
+        </div>
+        <div class="field-error" id="err-login-general" style="margin-bottom:12px; font-size:0.85rem;"></div>
+        <button type="submit" class="btn btn-filled btn-full" id="login-submit">
+          <span id="login-submit-text">Sign In →</span>
+        </button>
+        <div class="login-footer-link">
+          Don't have an account? <a id="switch-to-register">Register here</a>
+        </div>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form" class="login-form" novalidate>
+        <div class="form-group">
+          <label for="reg-email">College Email</label>
+          <input type="email" id="reg-email" class="form-input"
+            placeholder="am.sc.u4aie25159@am.students.amrita.edu" autocomplete="email">
+          <div class="domain-hint">Must end with <span>@am.students.amrita.edu</span></div>
+          <span class="field-error" id="err-reg-email">Use your Amrita college email (@am.students.amrita.edu).</span>
+        </div>
+        <div class="form-group">
+          <label for="reg-password">Password</label>
+          <input type="password" id="reg-password" class="form-input"
+            placeholder="Min. 6 characters" autocomplete="new-password">
+          <span class="field-error" id="err-reg-password">Password must be at least 6 characters.</span>
+        </div>
+        <div class="form-group">
+          <label for="reg-confirm">Confirm Password</label>
+          <input type="password" id="reg-confirm" class="form-input"
+            placeholder="Repeat your password" autocomplete="new-password">
+          <span class="field-error" id="err-reg-confirm">Passwords do not match.</span>
+        </div>
+        <div class="field-error" id="err-reg-general" style="margin-bottom:12px; font-size:0.85rem;"></div>
+        <button type="submit" class="btn btn-filled btn-full" id="reg-submit">
+          <span id="reg-submit-text">Create Account →</span>
+        </button>
+        <div class="login-footer-link">
+          Already have an account? <a id="switch-to-login">Sign in here</a>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+
+  <script src="js/main.js"></script>
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>

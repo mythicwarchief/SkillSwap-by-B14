@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Skills — SkillSwap</title>
+  <meta name="description" content="Browse skills offered and requested by students on SkillSwap. Filter by category and search for what you need.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script>(function(){var t=localStorage.getItem('skillswap-theme')||'light';if(t!=='dark')document.documentElement.setAttribute('data-theme','light');})();</script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">SkillSwap</a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="browse.html" class="active">Browse</a>
+          <a href="offer.html">Offer</a>
+          <a href="request.html">Request</a>
+          <a href="messages.html">Messages</a>
+          <a href="contact.html">Contact</a>
+          <a href="about.html">About</a>
+        </div>
+        <div id="auth-nav"></div>
+        <button id="theme-toggle" class="theme-toggle" title="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Browse Skills</h1>
+      <p>Discover what your peers are offering and what they're looking to learn.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+
+      <!-- Search -->
+      <div class="search-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 18a7.5 7.5 0 006.15-3.35z"/>
+        </svg>
+        <input type="text" id="search-input" placeholder="Search by skill, name, or description…" autocomplete="off">
+      </div>
+
+      <!-- Main Tabs: Offered / Requested -->
+      <div class="main-tabs" id="main-tabs">
+        <button class="main-tab active" data-tab="skills" id="tab-skills">🎓 Skills Offered</button>
+        <button class="main-tab" data-tab="requests" id="tab-requests">🙋 Skills Requested</button>
+      </div>
+
+      <!-- Category Filters -->
+      <div class="filter-tabs" id="filter-tabs">
+        <button class="filter-tab active" data-cat="all">All</button>
+        <button class="filter-tab" data-cat="technical">Technical</button>
+        <button class="filter-tab" data-cat="creative">Creative</button>
+        <button class="filter-tab" data-cat="academic">Academic</button>
+      </div>
+
+      <!-- Grid -->
+      <div class="skills-grid" id="skills-grid">
+        <div class="spinner-wrapper" style="grid-column:1/-1;">
+          <div class="spinner"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 SkillSwap | Built by Team B14</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script type="module" src="js/browse.js"></script>
+</body>
+</html>

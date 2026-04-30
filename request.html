@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request a Skill — SkillSwap</title>
+  <meta name="description" content="Request a skill you want to learn. Post your learning needs and connect with peers who can help.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script>(function(){var t=localStorage.getItem('skillswap-theme')||'light';if(t!=='dark')document.documentElement.setAttribute('data-theme','light');})();</script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">SkillSwap</a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="browse.html">Browse</a>
+          <a href="offer.html">Offer</a>
+          <a href="request.html" class="active">Request</a>
+          <a href="messages.html">Messages</a>
+          <a href="contact.html">Contact</a>
+          <a href="about.html">About</a>
+        </div>
+        <div id="auth-nav"></div>
+        <button id="theme-toggle" class="theme-toggle" title="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Request a Skill</h1>
+      <p>Tell the community what you want to learn. Someone out there can help.</p>
+    </div>
+  </section>
+
+  <!-- Form Section -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="form-wrapper">
+
+        <form id="request-form" novalidate>
+
+          <!-- Name -->
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" class="form-input" placeholder="e.g. Priya Nair" autocomplete="name">
+            <span class="field-error" id="err-name">Please enter your full name.</span>
+          </div>
+
+
+          <!-- Skill Needed -->
+          <div class="form-group">
+            <label for="skillNeeded">Skill You Want to Learn</label>
+            <input type="text" id="skillNeeded" class="form-input" placeholder="e.g. Graphic Design, Machine Learning…">
+            <span class="field-error" id="err-skillNeeded">Please enter the skill you need.</span>
+          </div>
+
+          <!-- Category -->
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" class="form-input">
+              <option value="" disabled selected>Select a category</option>
+              <option value="Technical">Technical</option>
+              <option value="Creative">Creative</option>
+              <option value="Academic">Academic</option>
+            </select>
+            <span class="field-error" id="err-category">Please select a category.</span>
+          </div>
+
+          <!-- Learning Goal -->
+          <div class="form-group">
+            <label for="learningGoal">Learning Goal</label>
+            <textarea id="learningGoal" class="form-input" placeholder="What do you want to achieve? What is your current level? How soon do you need help?"></textarea>
+            <span class="field-error" id="err-learningGoal">Please describe your learning goal (min 20 characters).</span>
+          </div>
+
+          <!-- Preferred Schedule -->
+          <div class="form-group">
+            <label>Preferred Schedule</label>
+            <div class="check-group">
+              <label class="check-item"><input type="checkbox" name="schedule" value="Weekdays"> Weekdays</label>
+              <label class="check-item"><input type="checkbox" name="schedule" value="Weekends"> Weekends</label>
+              <label class="check-item"><input type="checkbox" name="schedule" value="Evenings"> Evenings</label>
+            </div>
+            <span class="field-error" id="err-schedule">Please select at least one schedule slot.</span>
+          </div>
+
+          <!-- Mode -->
+          <div class="form-group">
+            <label>Preferred Learning Mode</label>
+            <div class="radio-group">
+              <label class="radio-item"><input type="radio" name="mode" value="In-Person"> In-Person</label>
+              <label class="radio-item"><input type="radio" name="mode" value="Online"> Online</label>
+              <label class="radio-item"><input type="radio" name="mode" value="Both"> Both</label>
+            </div>
+            <span class="field-error" id="err-mode">Please select a preferred mode.</span>
+          </div>
+
+          <button type="submit" class="btn btn-filled btn-full" id="submit-btn">
+            <span id="submit-text">Post My Request →</span>
+          </button>
+
+        </form>
+
+        <!-- Success Banner -->
+        <div class="success-banner" id="success-banner">
+          <div class="success-icon">📬</div>
+          <h3>Your request has been posted!</h3>
+          <p>Students who can help will reach out to you via your college email.</p>
+          <a href="browse.html" class="btn" style="margin-top:16px;">Browse Skills</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 SkillSwap | Built by Team B14</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script type="module" src="js/request.js"></script>
+</body>
+</html>

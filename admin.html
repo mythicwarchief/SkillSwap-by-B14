@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — SkillSwap</title>
+  <meta name="description" content="SkillSwap Admin Panel — manage all skill offers, requests, and user submissions.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script>(function(){var t=localStorage.getItem('skillswap-theme')||'light';if(t!=='dark')document.documentElement.setAttribute('data-theme','light');})();</script>
+  <style>
+    /* ── Admin-specific overrides ── */
+    .admin-stats { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 36px; }
+    .admin-stat-card {
+      flex: 1; min-width: 140px;
+      background: rgba(18,18,18,0.7);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px 24px;
+      text-align: center;
+    }
+    html[data-theme="light"] .admin-stat-card {
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+    .admin-stat-card .num {
+      font-size: 2.2rem; font-weight: 800;
+      font-family: 'Poppins', sans-serif;
+      color: var(--accent); line-height: 1;
+    }
+    .admin-stat-card .lbl {
+      font-size: 0.75rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.6px;
+      margin-top: 6px;
+    }
+    .admin-tabs {
+      display: flex; gap: 8px;
+      background: rgba(18,18,18,0.5);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 4px; margin-bottom: 24px;
+    }
+    html[data-theme="light"] .admin-tabs {
+      background: rgba(255,255,255,0.8);
+    }
+    .admin-tab {
+      flex: 1; padding: 9px 20px;
+      border: none; background: transparent;
+      border-radius: calc(var(--radius-sm) - 3px);
+      font-size: 0.88rem; font-weight: 600;
+      color: var(--text-secondary); cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.25s;
+    }
+    .admin-tab.active {
+      background: var(--accent); color: #000;
+      box-shadow: 0 4px 14px rgba(255,204,0,0.25);
+    }
+    .admin-search {
+      width: 100%; padding: 10px 14px;
+      background: var(--bg-input); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text-primary);
+      font-family: 'Inter', sans-serif; font-size: 0.9rem;
+      margin-bottom: 20px; outline: none;
+      transition: border-color 0.2s;
+    }
+    .admin-search:focus { border-color: var(--accent); }
+    .admin-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .admin-table th {
+      text-align: left; padding: 10px 14px;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.6px; text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .admin-table td {
+      padding: 12px 14px; vertical-align: top;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .admin-table tr:last-child td { border-bottom: none; }
+    .admin-table tr:hover td { background: var(--accent-dim); }
+    .admin-table .title-cell {
+      color: var(--text-primary); font-weight: 600;
+      max-width: 220px;
+    }
+    .admin-table .email-cell {
+      font-size: 0.78rem; color: var(--text-muted);
+      word-break: break-all; max-width: 180px;
+    }
+    .admin-table .desc-cell {
+      max-width: 260px; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .admin-actions { display: flex; gap: 6px; white-space: nowrap; }
+    .btn-edit { background: var(--accent-dim); border: 1px solid var(--border-accent); color: var(--text-primary); border-radius: 6px; padding: 5px 12px; font-size: 0.78rem; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.2s; }
+    .btn-edit:hover { background: rgba(212,168,0,0.25); }
+    .btn-delete { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3); color: #ef4444; border-radius: 6px; padding: 5px 12px; font-size: 0.78rem; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.2s; }
+    .btn-delete:hover { background: rgba(239,68,68,0.18); }
+    .admin-empty { text-align: center; padding: 60px 20px; color: var(--text-muted); font-size: 0.9rem; }
+    .admin-spinner { display: flex; justify-content: center; padding: 60px 0; }
+    .admin-panel-wrap {
+      background: rgba(18,18,18,0.7); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: auto;
+    }
+    html[data-theme="light"] .admin-panel-wrap {
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    /* Edit modal fields */
+    .edit-field-group { margin-bottom: 14px; }
+    .edit-field-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 5px; font-weight: 600; }
+    /* Access denied state */
+    #access-denied {
+      min-height: 60vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 60px 20px;
+    }
+    #access-denied h2 { color: #ef4444; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">SkillSwap</a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="browse.html">Browse</a>
+          <a href="offer.html">Offer</a>
+          <a href="request.html">Request</a>
+          <a href="messages.html">Messages</a>
+          <a href="contact.html">Contact</a>
+          <a href="about.html">About</a>
+        </div>
+        <div id="auth-nav"></div>
+        <button id="theme-toggle" class="theme-toggle" title="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Access Denied (shown if not admin) -->
+  <div id="access-denied" style="display:none;">
+    <div style="font-size:3rem;">🔒</div>
+    <h2>Access Denied</h2>
+    <p style="color:var(--text-secondary); margin-bottom:20px;">
+      You don't have admin privileges. Contact the platform owner.
+    </p>
+    <a href="dashboard.html" class="btn btn-filled">← Back to Dashboard</a>
+  </div>
+
+  <!-- Admin Content (hidden until auth confirmed) -->
+  <div id="admin-content" style="display:none;">
+
+    <section class="hero" style="padding: 90px 0 50px;">
+      <div class="container">
+        <h1>⚙️ Admin Panel</h1>
+        <p>Manage all skill offers, requests, and platform content.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+
+        <!-- Stats row -->
+        <div class="admin-stats">
+          <div class="admin-stat-card">
+            <div class="num" id="stat-total-offers">—</div>
+            <div class="lbl">Total Offers</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="num" id="stat-total-requests">—</div>
+            <div class="lbl">Total Requests</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="num" id="stat-total-users">—</div>
+            <div class="lbl">Unique Users</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="num" id="stat-total-all">—</div>
+            <div class="lbl">Total Listings</div>
+          </div>
+        </div>
+
+        <!-- Tab switcher -->
+        <div class="admin-tabs">
+          <button class="admin-tab active" id="tab-offers">🎯 Skills Offered</button>
+          <button class="admin-tab" id="tab-requests">📋 Skills Requested</button>
+        </div>
+
+        <!-- Search -->
+        <input type="text" class="admin-search" id="admin-search"
+               placeholder="Search by title, email, or category…" autocomplete="off">
+
+        <!-- Offers panel -->
+        <div class="admin-panel-wrap" id="offers-panel">
+          <div class="admin-spinner"><div class="spinner"></div></div>
+        </div>
+
+        <!-- Requests panel (hidden by default) -->
+        <div class="admin-panel-wrap" id="requests-panel" style="display:none;">
+          <div class="admin-spinner"><div class="spinner"></div></div>
+        </div>
+
+      </div>
+    </section>
+
+  </div><!-- /#admin-content -->
+
+  <!-- ── Edit Modal ── -->
+  <div class="modal-overlay" id="edit-modal" style="display:none;">
+    <div class="modal-box" style="max-width:480px; width:100%;">
+      <button class="modal-close" id="close-edit-modal">✕</button>
+      <h3 id="edit-modal-title">Edit Listing</h3>
+      <div id="edit-form-fields" style="margin-top:18px;"></div>
+      <div style="display:flex; gap:10px; margin-top:20px; justify-content:flex-end;">
+        <button class="btn" id="cancel-edit-btn">Cancel</button>
+        <button class="btn btn-filled" id="save-edit-btn">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 SkillSwap | Admin Panel</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>
