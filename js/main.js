@@ -1,7 +1,7 @@
 // ── Theme: apply immediately to avoid flash ───────────────────────────────
 (function () {
   const t = localStorage.getItem('skillswap-theme') || 'light';
-  if (t !== 'dark') document.documentElement.setAttribute('data-theme', 'light');
+  document.documentElement.setAttribute('data-theme', t);
 })();
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     toggle.addEventListener('click', () => {
       if (isLight()) {
-        document.documentElement.removeAttribute('data-theme');
+        document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('skillswap-theme', 'dark');
         toggle.textContent = '🌙';
       } else {
