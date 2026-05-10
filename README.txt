@@ -1,28 +1,14 @@
 ╔══════════════════════════════════════════════════════════════╗
-║              SkillSwap — Setup & Run Instructions            ║
+║              SkillSwap — How to Access                       ║
 ╚══════════════════════════════════════════════════════════════╝
 
-IMPORTANT: Do NOT open index.html by double-clicking it.
-The app uses ES Modules which require a local web server.
+ LIVE WEBSITE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Click the link below to open SkillSwap directly in your browser:
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- OPTION 1 — VS Code (Easiest)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. Open the extracted folder in VS Code
-2. Install the "Live Server" extension (by Ritwick Dey)
-   - Click Extensions icon → search "Live Server" → Install
-3. Right-click index.html → "Open with Live Server"
-4. Browser opens automatically at http://127.0.0.1:5500
+  https://mythicwarchief.github.io/SkillSwap-by-B14/
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- OPTION 2 — Python (No install needed on most systems)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. Open a terminal / command prompt
-2. Navigate to the extracted folder:
-   cd path\to\End Term Project
-3. Run:
-   python -m http.server 8000
-4. Open browser → http://localhost:8000
+No installation, no server setup — just click and go!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  LOGGING IN
@@ -47,5 +33,6 @@ be visible to all users in real-time, on any device.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Platform  : SkillSwap — Peer Skill Exchange
 Built with: HTML, CSS, Vanilla JavaScript, Firebase
+Hosted on : GitHub Pages
 Backend   : Firebase Auth + Firestore (cloud)
 SDG Goals : SDG 4 (Quality Education), SDG 8 (Decent Work)
